@@ -6,11 +6,16 @@ import java.util.Objects;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ItemPedido implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	//JsonIgnore é pra o Jason nem olhar pra o ItemPedidoPK, para
+	//ele não ser serializado
+	@JsonIgnore
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
 	
@@ -32,9 +37,16 @@ public class ItemPedido implements Serializable {
 		this.preco = preco;
 	}
 	
+	/*
+	 * Tudo que começa com "get" ele entende q tem q serializar
+	 * quando busquei "localhost:8080/pedidos/1" no postman, gerou uma
+	 * referência ciclica, coloquei o @JsonIgnore no get para corrigir
+	 */
+	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
+
 	public Produto getProduto() {
 		return id.getProduto();
 	}
