@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 public class Categoria implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -23,7 +21,7 @@ public class Categoria implements Serializable{
 	
 	
 	//faz a anotação do Jason no lado que você quer que venha os objetos associados, ela vai impedir que se repita indefinidamente uma lista dentro de outra
-	@JsonManagedReference
+	
 	@ManyToMany(mappedBy="categorias")
 	private List<Produto> produtos = new ArrayList<>();
 	

@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nelioalves.cursomc.domain.enums.EstadoPagamento;
 
 @Entity
@@ -35,7 +35,7 @@ public abstract class Pagamento implements Serializable{
 	//private EstadoPagamento estado;
 	private Integer estado; //aqui deve ser um inteiro, se nn vai salvar errado no BD
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="pedido_id")
 	@MapsId //Garante que o pedido e o pagamento terão o mesmo ID
